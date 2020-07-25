@@ -2,16 +2,17 @@ const express = require('express'),
    { graphqlHTTP } = require('express-graphql'),
    schema = require('./schema/schema'),
    mongoose = require('mongoose'),
+
    port = 4000,
    app = express();
 
-mongoose.connect('mongodb+srv://new-user_01:testing123@cluster0.xgvoc.mongodb.net/graphqldb?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://new-user_01:testing123@cluster0.xgvoc.mongodb.net/graphql-reactdb?retryWrites=true&w=majority', {
    useNewUrlParser: true,
    useUnifiedTopology: true
 })
 
 mongoose.connection
-   .once('open', () => console.log('Connected to database'))
+   .once('open', () => console.log('Successfully connected to database'))
    .on('error', err => console.log('Connection Error: ' + err))
 
 
@@ -20,4 +21,4 @@ app.use('/graphql', graphqlHTTP({
    graphiql: true
 }))
 
-app.listen(port, () => console.log(`now listening for request at port ${port}`))
+app.listen(port, () => console.log(`GraphQL API is now running at http://localhost:${port}/graphql`))
